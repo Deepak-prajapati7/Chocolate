@@ -13,11 +13,13 @@ body{
     background-color:lightcoral;
     margin:0;
     font-family:Arial, sans-serif;
+    padding: 10px;
 }
 
 #heading{
     color:white;
     animation:bounce 1.5s infinite;
+    text-align:center;
 }
 
 @keyframes bounce{
@@ -27,8 +29,9 @@ body{
 }
 
 #main-box{
-    width:600px;
-    height:400px;
+    width:90%;
+    max-width:600px;
+    height:300px;
     background:white;
     border:2px solid black;
     display:flex;
@@ -51,6 +54,7 @@ body{
     background:white;
     color:red;
     cursor:pointer;
+    transition:0.3s;
 }
 
 #order-btn:hover{
@@ -80,6 +84,22 @@ body{
         opacity:0;
     }
 }
+
+/* MOBILE RESPONSIVE */
+@media screen and (max-width: 480px){
+    #main-box{
+        height:200px;
+    }
+
+    #order-btn{
+        padding:10px 24px;
+        font-size:16px;
+    }
+
+    #message{
+        font-size:18px;
+    }
+}
 </style>
 </head>
 
@@ -88,7 +108,7 @@ body{
 <h1 id="heading">ORDER-CHOCOLATE 🍫</h1>
 
 <div id="main-box">
-<img id="chocolate-image" src="milky-bar.jpg" alt = "Chocolate Image">
+<img id="chocolate-image" src="milky-bar.jpg" alt="Chocolate Image">
 </div>
 
 <button id="order-btn">ORDER NOW</button>
@@ -104,7 +124,7 @@ orderBtn.addEventListener("click", placeOrder);
 function placeOrder(){
     const rect = orderBtn.getBoundingClientRect(); // button position
 
-    // particle burst FIRST
+    // particle burst
     const colors = ["gold","red","orange","pink","yellow"];
 
     for(let i = 0; i < 80; i++){
@@ -121,8 +141,8 @@ function placeOrder(){
         particle.style.left = rect.left + rect.width / 2 + "px";
         particle.style.top = rect.top + rect.height / 2 + "px";
 
-        const x = (Math.random() - 0.5) * 500 + "px";
-        const y = (Math.random() - 0.5) * 500 + "px";
+        const x = (Math.random() - 0.5) * 300 + "px"; // reduced for mobile
+        const y = (Math.random() - 0.5) * 300 + "px";
 
         particle.style.setProperty("--x", x);
         particle.style.setProperty("--y", y);
@@ -132,7 +152,7 @@ function placeOrder(){
         setTimeout(() => particle.remove(), 900);
     }
 
-    // THEN hide button & show message
+    // hide button & show message
     orderBtn.style.display = "none";
     message.style.display = "block";
 }
